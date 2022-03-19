@@ -5,8 +5,10 @@ using System.IO;
 
 public class BrowserCore : ModuleRules
 {
-	public BrowserCore(TargetInfo Target)
-	{
+	public BrowserCore(ReadOnlyTargetRules Target) : base(Target)
+    {
+        PrivatePCHHeaderFile = "Private/BrowserCorePrivatePCH.h";
+		bPrecompile = true;
 		PublicIncludePaths.Add("Runtime/BrowserCore/Public");
 		PrivateIncludePaths.Add("Runtime/BrowserCore/Private");
 
@@ -17,6 +19,7 @@ public class BrowserCore : ModuleRules
 				"CoreUObject",
 				"RHI",
 				"InputCore",
+				"ApplicationCore",
 				"Slate",
 				"SlateCore",
 				"Serialization",
@@ -36,14 +39,16 @@ public class BrowserCore : ModuleRules
 			if (Target.Platform == UnrealTargetPlatform.Mac)
 			{
 				// Add contents of UnrealCefSubProcess.app directory as runtime dependencies
+				/*
 				foreach (string FilePath in Directory.EnumerateFiles(BuildConfiguration.RelativeEnginePath + "/Binaries/Mac/UnrealCEFSubProcess.app", "*", SearchOption.AllDirectories))
 				{
 					RuntimeDependencies.Add(new RuntimeDependency(FilePath));
 				}
+				*/
 			}
 			else
 			{
-				RuntimeDependencies.Add(new RuntimeDependency("$(EngineDir)/Binaries/" + Target.Platform.ToString() + "/UnrealCEFSubProcess.exe"));
+				RuntimeDependencies.Add(Path.Combine("$(EngineDir)/Binaries/" + Target.Platform.ToString() + "/UnrealCEFSubProcess.exe"));
 			}
 		}
 
@@ -52,6 +57,12 @@ public class BrowserCore : ModuleRules
 			PrivateDependencyModuleNames.Add("OnlineSubsystem");
 		}
 		
-		bEnableShadowVariableWarnings = false;
+		// bEnableShadowVariableWarnings = false;
+		ShadowVariableWarningLevel = WarningLevel.Off;
+
+		PublicDefinitions.AddRange(new string[]
+        {
+			"USING_CEF_SHARED"
+		});
 	}
 }

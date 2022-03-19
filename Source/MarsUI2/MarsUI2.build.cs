@@ -4,8 +4,10 @@ namespace UnrealBuildTool.Rules
 {
 	public class MarsUI2 : ModuleRules
 	{
-		public MarsUI2(TargetInfo Target)
+		public MarsUI2(ReadOnlyTargetRules Target) : base(Target)
 		{
+            PrivatePCHHeaderFile = "Private/MarsUI2PrivatePCH.h";
+			bPrecompile = true;
 			PublicDependencyModuleNames.AddRange(
 				new string[]
 				{
