@@ -1,0 +1,8 @@
+{
+	"BuildId": "17155196",
+	"Modules": 
+	{
+		"BrowserCore": "UE4Editor-BrowserCore.dll",
+		"MarsUI2": "UE4Editor-MarsUI2.dll"
+	}
+}

@@ -1,4 +1,4 @@
-# Visual Studio 2015 user specific files
+## Visual Studio 2015 user specific files
 .vs/
 
 # Compiled Object files
@@ -14,7 +14,7 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+# *.dll
 
 # Fortran module files
 *.mod
@@ -44,7 +44,7 @@ SourceArt/**/*.png
 SourceArt/**/*.tga
 
 # Binary Files
-Binaries/*
+# Binaries/*
 
 # Builds
 Build/*
